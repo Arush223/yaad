@@ -4,10 +4,11 @@ import { neobrutalism } from '@clerk/themes'
 
 export const metadata = {
   title: 'Yaad',
-  description: '<em>Your Living Memory</em>',
+  description: 'Your Living Memory',
   icons: {
     icon: "/favicon.ico",
-  },
+
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode}) {
