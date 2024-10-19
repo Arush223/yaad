@@ -1,11 +1,16 @@
 import { ClerkProvider,} from '@clerk/nextjs'
 import './globals.css'
 import { neobrutalism } from '@clerk/themes'
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+
+export const metadata = {
+  title: 'Yaad',
+  description: '<em>Your Living Memory</em>',
+  icons: {
+    icon: "/favicon.ico",
+  },
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode}) {
   return (
     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY} appearance={{
       layout: {
