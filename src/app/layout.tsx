@@ -13,12 +13,12 @@ export default function RootLayout({
       },
       baseTheme: neobrutalism,
       variables: { 
-      colorPrimary: '#4A90E2', // A nice blue
-      colorBackground: '#d1af8a', // Keeping the background the same
-      colorText: '#333333', // A dark grey for better readability
-      
+      colorPrimary: '#4A90E2', 
+      colorBackground: '#d1af8a', 
+      colorText: '#333333',       
       }
     }}>
+       {/* uses the jmh typewriter font */}
     <html lang="en">
       <body>{children}</body>
     </html>
