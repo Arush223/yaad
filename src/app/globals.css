@@ -10,7 +10,7 @@
 
 
 body {
-  font-family: 'JMH Typewriter', Arial, Helvetica, sans-serif; /* Use your font here */
+  font-family: 'JMH Typewriter', Arial, Helvetica, sans-serif; 
 }
 
 @layer utilities {
@@ -82,4 +82,8 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+#nav-image {
+  transition: transform 0.1s ease-out;
 }

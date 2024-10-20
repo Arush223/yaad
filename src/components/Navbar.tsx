@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -8,7 +8,7 @@ import { Menu, X } from 'lucide-react';
 const navItems = [
   { name: 'About', path: '/about' },
   { name: 'Team', path: '/team' },
-  { name: 'Memories', path: '/memories' },
+  { name: 'Sign In', path: '/auth/sign-in' },
 ];
 
 interface NavItem {
@@ -34,8 +34,16 @@ const NavLink = ({ item, isActive, isMobile = false, onClick = () => {} }: { ite
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isFlipping, setIsFlipping] = useState(false); // Track flip state
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleImageClick = () => {
+    if (!isFlipping) {
+      setIsFlipping(true);
+      setTimeout(() => setIsFlipping(false), 5000); // Reset flip state after 600ms (duration of flip animation)
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
@@ -43,7 +51,23 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <Link href="/" aria-label="Home">
-              <Image src="/yaadbg.svg" alt="Yaad Logo" width={100} height={40} priority />
+              <div className="relative">
+                <Image
+                  id="nav-image"
+                  src="/yaadbg.svg"
+                  alt="Yaad Logo"
+                  width={100}
+                  height={40}
+                  priority
+                  onClick={handleImageClick}
+                  style={{
+                    transform: isFlipping
+                      ? `rotateY(360deg)` // Horizontal flip
+                      : '',
+                    transition: 'transform 0.6s ease-in-out', // Smooth transition for the flip
+                  }}
+                />
+              </div>
             </Link>
           </div>
           <div className="hidden md:block">
