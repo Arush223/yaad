@@ -4,10 +4,14 @@ import Footer from '@/components/Footer'
 
 const PrivacyPolicyPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div 
+      className="min-h-screen flex flex-col bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/paper.png')" }}
+    >
       <Navbar />
+
       <main className="flex-grow container mx-auto px-4 py-20">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-md">
           <h1 className="text-3xl font-bold mb-6 text-center">Privacy Policy</h1>
           
           <p className="mb-4"><strong>Effective Date:</strong> October 2024</p>
@@ -35,7 +39,8 @@ const PrivacyPolicyPage: React.FC = () => {
           <p className="mt-8 text-sm text-gray-600">This privacy policy may be updated from time to time, and we encourage you to review it periodically.</p>
         </div>
       </main>
-      <Footer />
+
+      <Footer className = "text-white bg-black"/>
     </div>
   )
 }

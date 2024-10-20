@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client';
 import React, { useState, useRef } from 'react';
 import { Mic, Square, Play, Download } from 'lucide-react';
@@ -69,8 +70,12 @@ const AudioRecorder = () => {
     <>
       <SignedIn>
         <Navbar />
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-          <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        {/* Main Container with Background */}
+        <div 
+          className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/paper.png')" }}
+        >
+          <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
             <h1 className="text-3xl font-bold mb-6 text-center">Audio Recorder</h1>
 
             {error && (
@@ -101,7 +106,7 @@ const AudioRecorder = () => {
             )}
           </div>
         </div>
-        <Footer />
+        <Footer className = 'text-white bg-black'/>
       </SignedIn>
       <SignedOut>
         <RedirectToSignIn />
