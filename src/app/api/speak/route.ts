@@ -1,6 +1,5 @@
 import { createClient, DeepgramClient } from "@deepgram/sdk";
 import * as fs from "fs";
-import { POST } from "../transcribe/route"
 
 // STEP 1: Create a Deepgram client with your API key
 const deepgram: DeepgramClient = createClient(process.env.DEEPGRAM_API_KEY as string);
