@@ -9,33 +9,32 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.7.5",
+    "@clerk/themes": "^2.1.37",
     "@deepgram/sdk": "^3.8.1",
     "@langchain/pinecone": "^0.1.1",
     "@pinecone-database/pinecone": "^3.0.3",
-    "@singlestore/client": "^0.0.41",
-    "cross-fetch": "^4.0.0",
-    "dotenv": "^16.4.5",
-    "groq-sdk": "^0.7.0",
-    "langchain": "^0.3.2",
-    "next": "14.2.15",
-    "node-fetch": "^2.7.0",
-    "openai": "^4.68.1",
-    "@clerk/nextjs": "^5.7.5",
-    "@clerk/themes": "^2.1.37",
     "@radix-ui/react-slot": "^1.1.0",
+    "@singlestore/client": "^0.0.41",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cross-fetch": "^4.0.0",
+    "dot-case": "^3.0.4",
+    "dotenv": "^16.4.5",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^11.11.9",
+    "groq-sdk": "^0.7.0",
+    "langchain": "^0.3.2",
     "lucide-react": "^0.453.0",
     "mysql2": "^3.11.3",
     "next": "14.2.15",
+    "node-fetch": "^2.7.0",
+    "openai": "^4.68.1",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.15"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -43,7 +42,6 @@
     "eslint-config-next": "14.2.15",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.15"
+    "typescript": "^5"
   }
 }
