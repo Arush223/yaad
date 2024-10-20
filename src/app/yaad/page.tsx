@@ -6,7 +6,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { motion } from 'framer-motion'; // For animations
 import { Slider } from '@/components/ui/slider';
 
 const AudioRecorder: React.FC = () => {
@@ -107,7 +106,7 @@ const AudioRecorder: React.FC = () => {
       const formData = new FormData();
       formData.append('audio', audioBlob, fileName);
 
-      const response = await fetch('src/app/api/speakandstore', {
+      const response = await fetch('/api/speakandstore', {
         method: 'POST',
         body: formData,
       });
