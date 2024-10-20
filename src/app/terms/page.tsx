@@ -1,8 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import Image from 'next/image';
-import { motion } from 'framer-motion'; // For animations
 
 const TermsOfUse: React.FC = () => {
   return (

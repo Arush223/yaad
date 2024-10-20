@@ -3,7 +3,12 @@
 import React, { useState, useEffect } from 'react';
 
 const TranscriptionComponent = () => {
-  const [transcriptionData, setTranscriptionData] = useState<any>(null);
+  interface TranscriptionData {
+    text: string;
+    // Add other properties that your transcription data might have
+  }
+
+  const [transcriptionData, setTranscriptionData] = useState<TranscriptionData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState('');
   const [availableFiles, setAvailableFiles] = useState<string[]>([]);
