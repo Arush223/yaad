@@ -3,6 +3,7 @@ import { useState } from 'react';
 import emailjs from 'emailjs-com';
 import Navbar from '@/components/Navbar';
 import { motion } from 'framer-motion'; // For animations
+import Footer from '@/components/Footer';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -137,6 +138,7 @@ const ContactForm = () => {
           )}
         </motion.div>
       </div>
+      <Footer className = "text-white bg-black"/>
     </div>
   );
 };
