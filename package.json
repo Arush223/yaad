@@ -14,6 +14,7 @@
     "@deepgram/sdk": "^3.8.1",
     "@langchain/pinecone": "^0.1.1",
     "@pinecone-database/pinecone": "^3.0.3",
+    "@radix-ui/react-slider": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@singlestore/client": "^0.0.41",
     "class-variance-authority": "^0.7.0",
