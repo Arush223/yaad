@@ -1,33 +1,39 @@
-import React from 'react'
-import Image from 'next/image'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+/* eslint-disable react/no-unescaped-entities */
+import React from 'react';
+import Image from 'next/image';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import Link from 'next/link';
 
 interface TeamMember {
   name: string;
   role: string;
   imageUrl: string;
   bio: string;
+  linkedinUrl: string;
 }
 
 const teamMembers: TeamMember[] = [
   {
-    name: "Aarush Jagtap",
-    role: "Full Stack Developer",
-    imageUrl: "/aarush.png",
-    bio: "Brief biography of Team Member 1. Describe their background, expertise, and role in Yaad."
+    name: 'Aarush Jagtap',
+    role: 'Full Stack Developer',
+    imageUrl: '/aarush.png',
+    bio: "Brief biography of Team Member 1. Describe their background, expertise, and role in Yaad.",
+    linkedinUrl: 'https://www.linkedin.com/in/aarushj/',
   },
   {
-    name: "Pranav Singh",
-    role: "Back-End Developer",
-    imageUrl: "/pranav.png",
-    bio: "Brief biography of Team Member 2. Highlight their technical skills and contributions to Yaad's development."
+    name: 'Pranav Singh',
+    role: 'Back-End Developer',
+    imageUrl: '/pranav.png',
+    bio: "Brief biography of Team Member 2. Highlight their technical skills and contributions to Yaad's development.",
+    linkedinUrl: 'https://www.linkedin.com/in/pranav-singh-usa/',
   },
   {
-    name: "Siddhant Bhardwaj",
-    role: "UI/UX Designer",
-    imageUrl: "/siddhant.png",
-    bio: "Brief biography of Team Member 3. Emphasize their design philosophy and how it shapes Yaad's user experience."
+    name: 'Siddhant Bhardwaj',
+    role: 'UI/UX Designer',
+    imageUrl: '/siddhant.png',
+    bio: "Brief biography of Team Member 3. Emphasize their design philosophy and how it shapes Yaad's user experience.",
+    linkedinUrl: 'https://www.linkedin.com/in/siddhantbh1/',
   },
 ];
 
@@ -37,10 +43,10 @@ const TeamPage: React.FC = () => {
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-20">
         <h1 className="text-3xl font-bold mb-8 text-center">Meet Team Yaad</h1>
-        
+
         <div className="grid md:grid-cols-3 gap-8">
           {teamMembers.map((member, index) => (
-            <div key={index} className="flex flex-col items-center">
+            <div key={index} className="flex flex-col items-center text-center">
               <div className="w-48 h-48 mb-4 relative">
                 <Image 
                   src={member.imageUrl} 
@@ -52,7 +58,18 @@ const TeamPage: React.FC = () => {
               </div>
               <h2 className="text-xl font-semibold mb-2">{member.name}</h2>
               <p className="text-gray-600 mb-2">{member.role}</p>
-              <p className="text-center">{member.bio}</p>
+              <p className="text-center mb-4">{member.bio}</p>
+
+              {/* LinkedIn Icon */}
+              <Link href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" className="mt-2">
+                <Image 
+                  src="/linkedin.svg"  // Make sure this path points to a valid LinkedIn icon
+                  alt="LinkedIn Icon" 
+                  width={24} 
+                  height={24} 
+                  className="hover:opacity-75 transition-opacity duration-200"
+                />
+              </Link>
             </div>
           ))}
         </div>
@@ -66,7 +83,7 @@ const TeamPage: React.FC = () => {
       </main>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default TeamPage
+export default TeamPage;
