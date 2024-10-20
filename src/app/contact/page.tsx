@@ -60,16 +60,20 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-indigo-100">
+    <div className="min-h-screen">
+      <div 
+      className="flex flex-col bg-no-repeat bg-cover bg-center"
+      style={{ backgroundImage: 'url(/paper.png)' }}>
+      
       <Navbar />
-      <div className="max-w-4xl mx-auto px-8 py-24">
+      <div className=" flex-grow container max-w-4xl mx-auto px-4 py-20">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
           className="bg-white shadow-xl rounded-xl p-8 relative"
         >
-          <h2 className="text-4xl font-bold text-center text-indigo-600 mb-6">
+          <h2 className="text-4xl font-bold text-center text-black mb-6">
             Get in Touch
           </h2>
           <p className="text-gray-500 text-center mb-10">
@@ -113,7 +117,7 @@ const ContactForm = () => {
               whileTap={{ scale: 0.95 }}
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 bg-blue-600 text-white rounded-lg font-bold transition-transform"
+              className="w-full py-4 bg-black text-white rounded-lg font-bold transition-transform"
             >
               {isSubmitting ? (
                 <div className="flex items-center justify-center space-x-2">
@@ -139,6 +143,7 @@ const ContactForm = () => {
         </motion.div>
       </div>
       <Footer className = "text-white bg-black"/>
+      </div>
     </div>
   );
 };
