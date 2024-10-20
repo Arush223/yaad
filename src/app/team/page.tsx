@@ -41,6 +41,7 @@ const TeamPage: React.FC = () => {
     >
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-20 flex flex-col items-center justify-center">
+        
         <h1 className="text-3xl font-bold mb-8 text-center">Meet Team Yaad</h1>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -56,7 +57,7 @@ const TeamPage: React.FC = () => {
                 />
               </div>
               <h2 className="text-xl font-semibold mb-2">{member.name}</h2>
-              <p className="text-black-0000 mb-2">{member.role}</p>
+              <p className="text- mb-2">{member.role}</p>
 
               {/* LinkedIn Icon */}
               <Link href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" className="mt-2">
