@@ -22,7 +22,7 @@ const AboutPage: React.FC = () => {
 
       {/* Main Content */}
       <div className="flex-grow container mx-auto px-4 py-20 flex flex-col items-center justify-center relative z-10">
-        <div className="max-w-2xl text-center space-y-12">
+        <div className="max-w-2xl  mx-auto bg-white p-8 rounded-2xl shadow-md text-center space-y-12">
           <h1 className="text-4xl font-bold mb-8">About Yaad</h1>
 
           <section>
@@ -53,7 +53,10 @@ const AboutPage: React.FC = () => {
                 passwordless login and multi-factor authentication.
               </li>
               <li>
-                <span className="font-semibold">Not SingleStore:</span> Not Singlestore bc it's poopy.
+                <span className="font-semibold">Pinecone for Database and Vector Embeddings:</span> At the core of our memory retrieval system is Pinecone, 
+                a high-performance vector database solution. Pinecone allows us to store vector embeddings of recorded memories, 
+                enabling our AI to quickly and accurately retrieve related memories based on specific prompts. 
+                This advanced search capability makes it easier to find and relive memories that may have faded over time..
               </li>
               <li>
                 <span className="font-semibold">Tailwind CSS:</span> We've designed
