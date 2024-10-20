@@ -23,6 +23,7 @@
     "dotenv": "^16.4.5",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^11.11.9",
+    "fs": "^0.0.1-security",
     "groq-sdk": "^0.7.0",
     "langchain": "^0.3.2",
     "lucide-react": "^0.453.0",
