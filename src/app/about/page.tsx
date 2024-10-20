@@ -6,19 +6,23 @@ import Image from 'next/image';
 
 const AboutPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className = "flext-grow relative">
+    <div className="min-h-screen flex flex-col relative">
+      {/* Background Image */}
+      <div className="absolute inset-0 -z-10">
         <Image 
-          src = "/paper.png"
-          alt = "Paper Background"
-          layout = "fill"
-          objectFit='cover'
+          src="/paper.png"
+          alt="Paper Background"
+          layout="fill"
+          objectFit="cover"
           quality={100}
           priority
         />
-        <Navbar />
       </div>
-      <div className="flex-grow container mx-auto px-4 py-20 flex flex-col items-center justify-center">
+
+      <Navbar />
+
+      {/* Main Content */}
+      <div className="flex-grow container mx-auto px-4 py-20 flex flex-col items-center justify-center relative z-10">
         <div className="max-w-2xl text-center space-y-12">
           <h1 className="text-4xl font-bold mb-8">About Yaad</h1>
 
@@ -50,9 +54,7 @@ const AboutPage: React.FC = () => {
                 passwordless login and multi-factor authentication.
               </li>
               <li>
-                <span className="font-semibold">SingleStore:</span> The core of our
-                memory retrieval system is powered by SingleStore, used for both
-                database management and vector embeddings.
+                <span className="font-semibold">Not SingleStore:</span> Not Singlestore bc it's poopy.
               </li>
               <li>
                 <span className="font-semibold">Tailwind CSS:</span> We've designed
@@ -74,9 +76,10 @@ const AboutPage: React.FC = () => {
           </section>
         </div>
       </div>
+
       <Footer className='text-white bg-black'/>
     </div>
   );
 }
 
-export default AboutPage
+export default AboutPage;

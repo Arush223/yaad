@@ -9,7 +9,6 @@ interface TeamMember {
   name: string;
   role: string;
   imageUrl: string;
-  bio: string;
   linkedinUrl: string;
 }
 
@@ -18,30 +17,30 @@ const teamMembers: TeamMember[] = [
     name: 'Aarush Jagtap',
     role: 'Full Stack Developer',
     imageUrl: '/aarush.png',
-    bio: "Brief biography of Team Member 1. Describe their background, expertise, and role in Yaad.",
     linkedinUrl: 'https://www.linkedin.com/in/aarushj/',
   },
   {
     name: 'Pranav Singh',
     role: 'Back-End Developer',
     imageUrl: '/pranav.png',
-    bio: "Brief biography of Team Member 2. Highlight their technical skills and contributions to Yaad's development.",
     linkedinUrl: 'https://www.linkedin.com/in/pranav-singh-usa/',
   },
   {
     name: 'Siddhant Bhardwaj',
     role: 'UI/UX Designer',
     imageUrl: '/siddhant.png',
-    bio: "Brief biography of Team Member 3. Emphasize their design philosophy and how it shapes Yaad's user experience.",
     linkedinUrl: 'https://www.linkedin.com/in/siddhantbh1/',
   },
 ];
 
 const TeamPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div 
+      className="min-h-screen flex flex-col bg-cover bg-center"
+      style={{ backgroundImage: 'url(/paper.png)' }}
+    >
       <Navbar />
-      <main className="flex-grow container mx-auto px-4 py-20">
+      <main className="flex-grow container mx-auto px-4 py-20 flex flex-col items-center justify-center">
         <h1 className="text-3xl font-bold mb-8 text-center">Meet Team Yaad</h1>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -57,8 +56,7 @@ const TeamPage: React.FC = () => {
                 />
               </div>
               <h2 className="text-xl font-semibold mb-2">{member.name}</h2>
-              <p className="text-gray-600 mb-2">{member.role}</p>
-              <p className="text-center mb-4">{member.bio}</p>
+              <p className="text-black-0000 mb-2">{member.role}</p>
 
               {/* LinkedIn Icon */}
               <Link href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" className="mt-2">
@@ -73,15 +71,8 @@ const TeamPage: React.FC = () => {
             </div>
           ))}
         </div>
-
-        <section className="mt-12">
-          <h2 className="text-2xl font-bold mb-4 text-center">Our Mission</h2>
-          <p className="text-center max-w-2xl mx-auto">
-            At Yaad, we're committed to preserving cherished memories and improving the lives of individuals affected by cognitive decline. Our team combines expertise in technology, design, and healthcare to create innovative solutions that foster connection and joy.
-          </p>
-        </section>
       </main>
-      <Footer />
+      <Footer className='text-white bg-black'/>
     </div>
   );
 };

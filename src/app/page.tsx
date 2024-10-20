@@ -95,7 +95,7 @@ const Page: React.FC = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer className='text-white bg-black'/>
     </div>
   );
 };
