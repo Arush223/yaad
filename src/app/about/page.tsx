@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react'
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
@@ -8,7 +8,7 @@ const AboutPage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col relative">
       {/* Background Image */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
         <Image 
           src="/paper.png"
           alt="Paper Background"
@@ -77,7 +77,7 @@ const AboutPage: React.FC = () => {
         </div>
       </div>
 
-      <Footer className='text-white bg-black'/>
+      <Footer className="text-white bg-black z-20" />
     </div>
   );
 }
