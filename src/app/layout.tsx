@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode}) {
       colorPrimary: '#4A90E2', 
       colorBackground: '#d1af8a', 
       colorText: '#333333',       
-      }
+      }      
     }}>
        {/* uses the jmh typewriter font */}
     <html lang="en">
