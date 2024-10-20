@@ -34,16 +34,20 @@ const NavLink = ({ item, isActive, isMobile = false, onClick = () => {} }: { ite
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [isFlipping, setIsFlipping] = useState(false); // Track flip state
+  const [isFlipping, setIsFlipping] = useState(false); 
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const handleImageClick = () => {
-    if (!isFlipping) {
-      setIsFlipping(true);
-      setTimeout(() => setIsFlipping(false), 5000); // Reset flip state after 600ms (duration of flip animation)
-    }
-  };
+  const [flipDegree, setFlipDegree] = useState(0); 
+
+const handleImageClick = () => {
+  if (!isFlipping) {
+    setIsFlipping(true);
+    setFlipDegree(flipDegree + 360); 
+    setTimeout(() => setIsFlipping(false), 1000); 
+  }
+};
+  
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
@@ -52,21 +56,20 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <Link href="/" aria-label="Home">
               <div className="relative">
-                <Image
-                  id="nav-image"
-                  src="/yaadbg.svg"
-                  alt="Yaad Logo"
-                  width={100}
-                  height={40}
-                  priority
-                  onClick={handleImageClick}
-                  style={{
-                    transform: isFlipping
-                      ? `rotateY(360deg)` // Horizontal flip
-                      : '',
+              <Image
+                id="nav-image"
+                src="/yaadbg.svg"
+                alt="Yaad Logo"
+                width={100}
+                height={40}
+                priority
+                onClick={handleImageClick}
+                style={{
+                    transform: `rotateY(${flipDegree}deg)`, // Rotate by the flipDegree
                     transition: 'transform 0.6s ease-in-out', // Smooth transition for the flip
-                  }}
+                }}
                 />
+
               </div>
             </Link>
           </div>
