@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, Square, Play, Pause, Download } from 'lucide-react';
+import { Mic, Square, Play, Pause, Download, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
@@ -15,6 +15,9 @@ const AudioRecorder: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
+  const [fileName, setFileName] = useState<string>('');
+  const [isSending, setIsSending] = useState<boolean>(false);
+  const [sendResult, setSendResult] = useState<string>('');
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -55,6 +58,9 @@ const AudioRecorder: React.FC = () => {
         if (audioRef.current) {
           audioRef.current.src = audioUrl;
         }
+        // Generate a unique filename
+        const newFileName = `recording_${Date.now()}.wav`;
+        setFileName(newFileName);
       };
 
       mediaRecorderRef.current.start();
@@ -107,7 +113,7 @@ const AudioRecorder: React.FC = () => {
       document.body.appendChild(a);
       a.style.display = 'none';
       a.href = audioURL;
-      a.download = 'recorded_audio.wav';
+      a.download = fileName;
       a.click();
       document.body.removeChild(a);
     }
@@ -118,6 +124,40 @@ const AudioRecorder: React.FC = () => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
+  const sendRecording = async () => {
+    if (!fileName) {
+      setError('No recording available to send.');
+      return;
+    }
+
+    setIsSending(true);
+    setSendResult('');
+    setError('');
+
+    try {
+      const response = await fetch('/api/speakandstore', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fileName }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSendResult(data.message);
+      } else {
+        setError(data.error || 'An error occurred while sending the recording.');
+      }
+    } catch (err) {
+      setError('An error occurred while sending the recording.');
+      console.error('Error sending recording:', err);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -134,6 +174,12 @@ const AudioRecorder: React.FC = () => {
             {error && (
               <Alert variant="destructive" className="mb-4">
                 <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            {sendResult && (
+              <Alert variant="default" className="mb-4">
+                <AlertDescription>{sendResult}</AlertDescription>
               </Alert>
             )}
 
@@ -159,6 +205,9 @@ const AudioRecorder: React.FC = () => {
                   </Button>
                   <Button onClick={downloadRecording} variant="outline">
                     <Download className="mr-2" /> Download
+                  </Button>
+                  <Button onClick={sendRecording} variant="outline" disabled={isSending}>
+                    <Send className="mr-2" /> {isSending ? 'Sending...' : 'Send'}
                   </Button>
                 </div>
                 <div className="flex items-center space-x-2">
