@@ -50,7 +50,10 @@ const textToSpeech = async (text: string): Promise<string> => {
         const stream = await response.getStream();
         if (stream) {
             const buffer = await getAudioBuffer(stream);
-            const outputPath = path.join(process.cwd(), 'public', 'audio', 'output.wav');
+            const outputPath = path.join(process.cwd(), 'src','public', 'audio', 'output.wav');
+            if (!fs.existsSync(outputPath)) {
+                fs.mkdirSync(outputPath, { recursive: true }); // Create directory if it doesn't exist
+            }
             fs.writeFileSync(outputPath, buffer);
             return 'output.wav';
         } else {
@@ -62,32 +65,30 @@ const textToSpeech = async (text: string): Promise<string> => {
     }
 };
 
-const speechToText = async (audioData: Blob | Buffer): Promise<string> => {
-    let buffer: Buffer;
-
-    // Convert Blob to Buffer if in browser environment
-    if (audioData instanceof Blob) {
-        const arrayBuffer = await audioData.arrayBuffer();
-        buffer = Buffer.from(arrayBuffer);
-    } else {
-        buffer = audioData;
-    }
+const speechToText = async (audioFile: File): Promise<string> => {
+    // Convert File to ArrayBuffer
+    const arrayBuffer = await audioFile.arrayBuffer();
+    
+    // Convert ArrayBuffer to Buffer
+    const buffer = Buffer.from(arrayBuffer);
 
     // Initialize Deepgram client (make sure you have the API key)
     const deepgram: DeepgramClient = createClient(process.env.DEEPGRAM_API_KEY as string);
 
     const { result, error } = await deepgram.listen.prerecorded.transcribeFile(
-        fs.createReadStream(buffer),
+        buffer,
         {
-        mimetype: audioData instanceof Blob ? audioData.type : 'audio/wav', // Default to 'audio/wav' for Buffer
-        model: 'nova-2',
-        smart_format: true,
-    });
+            mimetype: audioFile.type,
+            model: 'nova-2',
+            smart_format: true,
+        }
+    );
 
     if (error) {
         throw new Error(`Deepgram error: ${error.message}`);
     }
 
+    console.log(result)
     const transcript = result?.results?.channels?.[0]?.alternatives?.[0]?.transcript;
     if (!transcript) {
         throw new Error('No transcript found in response');
@@ -135,8 +136,9 @@ export async function POST(request: NextRequest) {
     try {
         const formData = await request.formData();
         console.log(formData)
-        const inputAudioFileName = formData.get('audio') as Blob;
-        const text = ''
+        const inputAudioFileName = formData.get('audio') as File;
+        const text = formData.get('text') as string;
+        
 
         let transcript: string;
         if (inputAudioFileName) {
