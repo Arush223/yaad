@@ -7,6 +7,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { motion } from 'framer-motion'; // For animations
 
 const AudioRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -70,6 +71,7 @@ const AudioRecorder = () => {
     <>
       <SignedIn>
         <Navbar />
+        
         {/* Main Container with Background */}
         <div 
           className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
