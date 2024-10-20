@@ -6,7 +6,7 @@ import Image from 'next/image';
 const AboutPage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <div className = "flex-grow relative">
+      <div className = "flext-grow relative">
         <Image 
           src = "/paper.png"
           alt = "Paper Background"
