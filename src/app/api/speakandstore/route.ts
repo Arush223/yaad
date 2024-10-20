@@ -20,8 +20,8 @@ export async function POST(request: NextRequest) {
   try {
     // Check for required environment variables
     if (!process.env.DEEPGRAM_API_KEY || !process.env.OPENAI_API_KEY || 
-        !process.env.PINECONE_API_KEY || !process.env.PINECONE_ENVIRONMENT || 
-        !process.env.PINECONE_INDEX_NAME) {
+        !process.env.PINECONE_API_KEY || 
+        !process.env.PINECONE_INDEX) {
       console.log('2. Missing environment variables');
       return NextResponse.json({ error: 'Missing required environment variables' }, { status: 500 });
     }
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
     // Initialize Pinecone
     console.log('15. Initializing Pinecone');
     const pinecone = await initPinecone();
-    const pineconeIndex = pinecone.Index(process.env.PINECONE_INDEX_NAME!);
+    const pineconeIndex = pinecone.Index(process.env.PINECONE_INDEX!);
     console.log('16. Pinecone index retrieved');
 
     // Initialize OpenAIEmbeddings

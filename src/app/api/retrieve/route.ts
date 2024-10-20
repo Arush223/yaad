@@ -8,7 +8,7 @@ import * as fs from "fs";
 import path from 'path';
 
 // Initialize clients
-const deepgram: DeepgramClient = createClient(process.env.DEEPGRAM_API_KEY as string);
+const deepgram: DeepgramClient = createClient(process.env.DEEPGRAM_API_KEY);
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const pinecone = new PineconeClient();
 const pineconeIndex = pinecone.Index(process.env.PINECONE_INDEX!);
@@ -62,24 +62,27 @@ const textToSpeech = async (text: string): Promise<string> => {
     }
 };
 
-// Speech to Text function
-const speechToText = async (fileName: string): Promise<string> => {
-    const audioFilePath = path.join(process.cwd(), 'public', 'audio', fileName);
-    
-    if (!fs.existsSync(audioFilePath)) {
-        throw new Error(`Audio file not found at: ${audioFilePath}`);
+const speechToText = async (audioData: Blob | Buffer): Promise<string> => {
+    let buffer: Buffer;
+
+    // Convert Blob to Buffer if in browser environment
+    if (audioData instanceof Blob) {
+        const arrayBuffer = await audioData.arrayBuffer();
+        buffer = Buffer.from(arrayBuffer);
+    } else {
+        buffer = audioData;
     }
 
-    const audioBuffer = fs.readFileSync(audioFilePath);
-    
+    // Initialize Deepgram client (make sure you have the API key)
+    const deepgram: DeepgramClient = createClient(process.env.DEEPGRAM_API_KEY as string);
+
     const { result, error } = await deepgram.listen.prerecorded.transcribeFile(
-        audioBuffer,
+        fs.createReadStream(buffer),
         {
-            model: 'nova-2',
-            smart_format: true,
-            mimetype: `audio/${path.extname(fileName).slice(1)}`,
-        }
-    );
+        mimetype: audioData instanceof Blob ? audioData.type : 'audio/wav', // Default to 'audio/wav' for Buffer
+        model: 'nova-2',
+        smart_format: true,
+    });
 
     if (error) {
         throw new Error(`Deepgram error: ${error.message}`);
@@ -130,8 +133,10 @@ const classifyText = async (text: string) => {
 // Main API route handler
 export async function POST(request: NextRequest) {
     try {
-        const body = await request.json();
-        const { inputAudioFileName, text } = body;
+        const formData = await request.formData();
+        console.log(formData)
+        const inputAudioFileName = formData.get('audio') as Blob;
+        const text = ''
 
         let transcript: string;
         if (inputAudioFileName) {
@@ -148,7 +153,7 @@ export async function POST(request: NextRequest) {
 
         // Generate response using LLM
         const llmResponse = await openai.chat.completions.create({
-            model: "gpt-4",
+            model: "gpt-4o",
             messages: [
                 { role: "system", content: "You are a helpful assistant. Respond to the user's input based on the given classification." },
                 { role: "user", content: `Classification: ${classification.response}\nUser input: ${transcript}` }

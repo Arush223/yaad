@@ -104,11 +104,13 @@ const AudioRecorder: React.FC = () => {
 
     try {
       const formData = new FormData();
-      formData.append('audio', audioBlob, fileName);
+      formData.append('audio', audioBlob);
+      console.log(formData.entries)
 
-      const response = await fetch('/api/speakandstore', {
+      const response = await fetch('/api/retrieve', {
         method: 'POST',
         body: formData,
+        
       });
 
       const data = await response.json();
@@ -181,7 +183,7 @@ const AudioRecorder: React.FC = () => {
           style={{ backgroundImage: "url('/paper.png')" }}
         >
           <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
-            <h1 className="text-3xl font-bold mb-6 text-center">Audio Recorder</h1>
+            <h1 className="text-3xl font-bold mb-6 text-center">Speak and Store</h1>
 
             {error && (
               <Alert variant="destructive" className="mb-4">
