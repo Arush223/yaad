@@ -4,8 +4,6 @@ import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { motion } from 'framer-motion'; // For animations
-
 interface TeamMember {
   name: string;
   role: string;
