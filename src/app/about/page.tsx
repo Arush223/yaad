@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -73,7 +74,7 @@ const AboutPage: React.FC = () => {
           </section>
         </div>
       </div>
-      <Footer />
+      <Footer className='text-white bg-black'/>
     </div>
   );
 }

@@ -72,7 +72,7 @@ const Page: React.FC = () => {
                     priority
                   />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-blue-600 font-semibold text-sm sm:text-base md:text-lg">Go to Yaad</span>
+                    <span className="text-blue-600 font-semibold text-sm sm:text-base md:text-lg ">Go to Yaad</span>
                   </div>
                 </div>
               </SignedIn>
