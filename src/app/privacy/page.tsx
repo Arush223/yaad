@@ -35,7 +35,7 @@ const PrivacyPolicyPage: React.FC = () => {
           <p className="mb-6">We take reasonable steps to protect your data and ensure its confidentiality. However, no system is completely secure, and we cannot guarantee the absolute security of your data.</p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">4. Contact Us</h2>
-          <p className="mb-6">If you have any questions or concerns about these terms, feel free to contact us at our contact page.</p>
+          <p className="mb-6">If you have any questions or concerns about these terms, feel free to contact us at our <a href="/contact" className="text-blue-700 underline"/>contact page.</p>
 
           <p className="mt-8 text-sm text-gray-600">This privacy policy may be updated from time to time, and we encourage you to review it periodically.</p>
         </div>
