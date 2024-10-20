@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, Square, Play, Pause, RotateCcw, Download } from 'lucide-react';
+import { Mic, Square, Play, Pause, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
@@ -155,7 +155,7 @@ const AudioRecorder: React.FC = () => {
                     {isPlaying ? 'Pause' : 'Play'}
                   </Button>
                   <Button onClick={stopPlayback} variant="outline">
-                    <RotateCcw className="mr-2" /> Stop
+                    <Square className="mr-2" /> Stop
                   </Button>
                   <Button onClick={downloadRecording} variant="outline">
                     <Download className="mr-2" /> Download
