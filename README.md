@@ -18,8 +18,8 @@ Our app is built using **Next.js**, a powerful React-based framework that enhanc
 ### Clerk for Authentication
 We use **Clerk** to manage user authentication securely. It provides a user-friendly login and sign-up process, supporting features like passwordless login and multi-factor authentication, ensuring that user data and memories are kept safe and accessible only to authorized individuals.
 
-### SingleStore for Database and Vector Embeddings
-The core of our memory retrieval system is powered by **SingleStore**, a high-performance, scalable database solution. We also use SingleStore for vector embeddings, which map memories in a way that allows our AI to find and retrieve related memories based on specific prompts. This enables a rich, contextual recall experience, making it easier to find memories that may have faded over time.
+### Pinecone for Database and Vector Embeddings
+At the core of our memory retrieval system is **Pinecone**, a high-performance vector database solution. Pinecone allows us to store vector embeddings of recorded memories, enabling our AI to quickly and accurately retrieve related memories based on specific prompts. This advanced search capability makes it easier to find and relive memories that may have faded over time.
 
 ### Tailwind CSS for User Interface
 We’ve designed the Living Memory interface with **Tailwind CSS**, a utility-first CSS framework. Tailwind enables rapid, responsive UI development, ensuring that our app is visually appealing, accessible, and easy to navigate for users of all ages and tech familiarity levels.
@@ -28,4 +28,3 @@ We’ve designed the Living Memory interface with **Tailwind CSS**, a utility-fi
 - **Aarush Jagtap** – Full Stack Engineer
 - **Pranav Singh** – Back End Engineer
 - **Siddhant Bhardwaj** – UI/UX Engineer
-```
