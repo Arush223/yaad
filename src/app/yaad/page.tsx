@@ -6,6 +6,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { motion } from 'framer-motion'; // For animations
 import { Slider } from '@/components/ui/slider';
 
 const AudioRecorder: React.FC = () => {

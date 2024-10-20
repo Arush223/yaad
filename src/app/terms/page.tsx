@@ -2,6 +2,7 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Image from 'next/image';
+import { motion } from 'framer-motion'; // For animations
 
 const TermsOfUse: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const TermsOfUse: React.FC = () => {
       style={{ backgroundImage: 'url(/paper.png)' }}
     >
       <Navbar />
+
       <div className="flex-1 flex flex-col items-center justify-center px-4 py-20">
         <div className="bg-white rounded-xl p-8 max-w-3xl w-full shadow-lg">
           <h1 className="text-3xl font-bold text-center mb-6 text-black">

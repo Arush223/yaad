@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import { motion } from 'framer-motion'; // For animations
 
 interface TeamMember {
   name: string;
@@ -40,6 +41,7 @@ const TeamPage: React.FC = () => {
       style={{ backgroundImage: 'url(/paper.png)' }}
     >
       <Navbar />
+
       <main className="flex-grow container mx-auto px-4 py-20 flex flex-col items-center justify-center">
         <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-4xl">
           <h1 className="text-3xl font-bold mb-8 text-center">Meet Team Yaad</h1>
