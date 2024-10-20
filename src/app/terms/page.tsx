@@ -1,21 +1,35 @@
 /* eslint-disable react/no-unescaped-entities */
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Image from 'next/image';
 
-const TermsOfUse = () => {
+const TermsOfUse: React.FC = () => {
   return (
-    <div className="min-h-screen bg-blue-50 text-gray-900 flex flex-col justify-center">
+    
+    <div className="min-h-screen flex flex-col relative">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <Image 
+          src="/paper.png"
+          alt="Paper Background"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          priority
+        />
+      </div>
+      
       <Navbar />
-      <div className="flex flex-col items-center justify-center px-4 py-20">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full border border-blue-200">
-          <h1 className="text-3xl font-semibold text-center mb-6 text-blue-700">
+      <div className="flex-1 flex flex-col items-center mx-auto justify-center px-4 py-20 z=10">
+        <div className="bg-white bg-opacity rounded-lg p-8 max-w-lg shadow-lg ">
+          <h1 className="text-3xl font-semibold text-center mb-6 text-black ">
             Terms of Use
           </h1>
-          <p className="mb-4">Effective Date: October 2024</p>
+          <p className="mb-4"> Effective: {new Date().getMonth()+1}/{new Date().getFullYear()} </p>
           <p className="text-gray-700 mb-4">
             Welcome to Yaad! By using our service, you agree to the
             following terms and conditions. Please read them carefully.
           </p>
-          <h2 className="text-xl font-semibold mb-2 text-blue-700">
+          <h2 className="text-xl font-semibold mb-2 text-black">
             1. Acceptance of Terms
           </h2>
           <p className="text-gray-700 mb-4">
@@ -23,7 +37,7 @@ const TermsOfUse = () => {
             Terms of Use and our Privacy Policy. If you do not agree with any
             part of these terms, please do not use our service.
           </p>
-          <h2 className="text-xl font-semibold mb-2 text-blue-700">
+          <h2 className="text-xl font-semibold mb-2 text-black">
             2. Use of Service
           </h2>
           <p className="text-gray-700 mb-4">
@@ -36,7 +50,7 @@ const TermsOfUse = () => {
             <li>Interfere with the security or functionality of the service.</li>
             <li>Attempt to access data that you are not authorized to access.</li>
           </ul>
-          <h2 className="text-xl font-semibold mb-2 text-blue-700">
+          <h2 className="text-xl font-semibold mb-2 text-black">
             3. User Accounts
           </h2>
           <p className="text-gray-700 mb-4">
@@ -44,7 +58,7 @@ const TermsOfUse = () => {
             information and keep your login credentials secure. You are
             responsible for all activities conducted through your account.
           </p>
-          <h2 className="text-xl font-semibold mb-2 text-blue-700">
+          <h2 className="text-xl font-semibold mb-2 text-black">
             4. Limitation of Liability
           </h2>
           <p className="text-gray-700 mb-4">
@@ -53,7 +67,7 @@ const TermsOfUse = () => {
             reliability, or availability of the service. You use the service at
             your own risk.
           </p>
-          <h2 className="text-xl font-semibold mb-2 text-blue-700">
+          <h2 className="text-xl font-semibold mb-2 text-black">
             5. Changes to the Terms
           </h2>
           <p className="text-gray-700 mb-4">
@@ -61,7 +75,7 @@ const TermsOfUse = () => {
             will be posted on this page, and your continued use of the service
             after any changes means you accept the new terms.
           </p>
-          <h2 className="text-xl font-semibold mb-2 text-blue-700">
+          <h2 className="text-xl font-semibold mb-2 text-black">
             6. Contact Us
           </h2>
           <p className="text-gray-700 mb-4">
@@ -70,6 +84,7 @@ const TermsOfUse = () => {
           </p>
         </div>
       </div>
+      <Footer className="text-white bg-black"/>
     </div>
   );
 };
