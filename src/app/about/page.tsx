@@ -7,7 +7,6 @@ import Image from 'next/image';
 const AboutPage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col relative">
-      {/* Background Image */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <Image 
           src="/paper.png"
