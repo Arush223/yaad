@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
 
-
 const AboutPage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -20,6 +19,7 @@ const AboutPage: React.FC = () => {
       </div>
 
       <Navbar />
+
       {/* Main Content */}
       <div className="flex-grow container mx-auto px-4 py-20 flex flex-col items-center justify-center relative z-10">
         <div className="max-w-2xl  mx-auto bg-white p-8 rounded-2xl shadow-md text-center space-y-12">
