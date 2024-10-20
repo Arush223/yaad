@@ -6,7 +6,7 @@ const SignInPage = () => (
   <div style={styles}>
     <Navbar />
     <SignIn path="/auth/sign-in" routing="path" signUpUrl="/auth/sign-up"  />
-    <Footer className="bg-black text-white"/>
+    <Footer />
   </div>
 );
 
