@@ -3,10 +3,13 @@ import { createClient } from '@deepgram/sdk';
 import fs from 'fs';
 import path from 'path';
 
-const deepgramClient = createClient(process.env.DEEPGRAM_API_KEY || '');
-
 export async function POST(request: NextRequest) {
   try {
+    if (!process.env.DEEPGRAM_API_KEY) {
+      return NextResponse.json({ error: 'DEEPGRAM_API_KEY is not configured' }, { status: 500 });
+    }
+
+    const deepgramClient = createClient(process.env.DEEPGRAM_API_KEY);
     const body = await request.json();
     const { fileName } = body;
     
@@ -14,19 +17,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'File name is required' }, { status: 400 });
     }
 
-    const audioFilePath = path.resolve('src/public/audio', fileName);
+    const audioFilePath = path.join(process.cwd(), 'src/public/audio', fileName);
     
-    console.log('Attempting to access file:', audioFilePath);
-
     if (!fs.existsSync(audioFilePath)) {
-      return NextResponse.json({ error: `Audio file not found: ${audioFilePath}` }, { status: 404 });
+      return NextResponse.json({ error: `Audio file not found at: ${audioFilePath}` }, { status: 404 });
     }
 
     const audioBuffer = fs.readFileSync(audioFilePath);
-
-    console.log('File size:', audioBuffer.length, 'bytes');
-    console.log('File type:', path.extname(fileName));
-
+    
     const { result, error } = await deepgramClient.listen.prerecorded.transcribeFile(
       audioBuffer,
       {
@@ -37,26 +35,19 @@ export async function POST(request: NextRequest) {
     );
 
     if (error) {
-      console.error('Deepgram API Error:', error);
-      return NextResponse.json({ error: `Deepgram API Error: ${error.message || 'Unknown error'}` }, { status: 500 });
+      return NextResponse.json({ error: `Deepgram error: ${error.message}` }, { status: 500 });
     }
 
-    return NextResponse.json(result);
+    const transcript = result?.results?.channels?.[0]?.alternatives?.[0]?.transcript;
+    if (!transcript) {
+      return NextResponse.json({ error: 'No transcript found in response' }, { status: 500 });
+    }
+
+    return NextResponse.json({ transcript });
+    
   } catch (error) {
-    console.error('Transcription error:', error);
-    return NextResponse.json({ error: `Error transcribing audio: ${error instanceof Error ? error.message : 'Unknown error'}` }, { status: 500 });
+    return NextResponse.json({ 
+      error: `Transcription error: ${error instanceof Error ? error.message : 'Unknown error'}` 
+    }, { status: 500 });
   }
-}
-
-// Add this to explicitly handle other methods
-export async function GET() {
-  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
-}
-
-export async function PUT() {
-  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
-}
-
-export async function DELETE() {
-  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
 }
