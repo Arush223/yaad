@@ -5,26 +5,17 @@ import Image from 'next/image';
 
 const TermsOfUse: React.FC = () => {
   return (
-    
-    <div className="min-h-screen flex flex-col relative">
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        <Image 
-          src="/paper.png"
-          alt="Paper Background"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-          priority
-        />
-      </div>
-      
+    <div 
+      className="min-h-screen flex flex-col bg-no-repeat bg-cover bg-center"
+      style={{ backgroundImage: 'url(/paper.png)' }}
+    >
       <Navbar />
-      <div className="flex-1 flex flex-col items-center mx-auto justify-center px-4 py-20 z=10">
-        <div className="bg-white bg-opacity rounded-lg p-8 max-w-lg shadow-lg ">
-          <h1 className="text-3xl font-semibold text-center mb-6 text-black ">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-20">
+        <div className="bg-white rounded-xl p-8 max-w-3xl w-full shadow-lg">
+          <h1 className="text-3xl font-bold text-center mb-6 text-black">
             Terms of Use
           </h1>
-          <p className="mb-4"> Effective: {new Date().getMonth()+1}/{new Date().getFullYear()} </p>
+          <p className="mb-4 font-semibold"> Effective: {new Date().getMonth()+1}/{new Date().getFullYear()} </p>
           <p className="text-gray-700 mb-4">
             Welcome to Yaad! By using our service, you agree to the
             following terms and conditions. Please read them carefully.
@@ -33,7 +24,7 @@ const TermsOfUse: React.FC = () => {
             1. Acceptance of Terms
           </h2>
           <p className="text-gray-700 mb-4">
-            By accessing or using Classify.ai, you agree to be bound by these
+            By accessing or using Yaad, you agree to be bound by these
             Terms of Use and our Privacy Policy. If you do not agree with any
             part of these terms, please do not use our service.
           </p>
@@ -41,8 +32,8 @@ const TermsOfUse: React.FC = () => {
             2. Use of Service
           </h2>
           <p className="text-gray-700 mb-4">
-            Classify.ai is an AI-powered platform designed for document
-            classification. You agree to use the service in compliance with all
+            Yaad is an AI-powered platform designed for preserving your living memory. 
+            You agree to use the service in compliance with all
             applicable laws and regulations. You must not:
           </p>
           <ul className="list-disc list-inside text-gray-700 mb-4">
@@ -62,7 +53,7 @@ const TermsOfUse: React.FC = () => {
             4. Limitation of Liability
           </h2>
           <p className="text-gray-700 mb-4">
-            Classify.ai is a hackathon project and is provided on an "as is"
+            Yaad is a hackathon project and is provided on an "as is"
             basis. We do not make any warranties regarding the accuracy,
             reliability, or availability of the service. You use the service at
             your own risk.
