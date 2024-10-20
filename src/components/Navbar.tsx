@@ -124,6 +124,10 @@ const Navbar = () => {
               isMobile={true}
               onClick={() => setIsOpen(false)}
             />
+            <div className='text-center'>
+              <UserButton />
+            </div>
+            
           </SignedIn>
           <SignedOut>
             <NavLink
