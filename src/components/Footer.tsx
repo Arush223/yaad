@@ -13,7 +13,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
           {/* Copyright Section */}
           <div className="text-center md:text-left text-sm md:text-base">
-            <p>&copy; {new Date().getFullYear()} Yaad. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Yaad.ai. All rights reserved.</p>
           </div>
 
           {/* Links Section */}

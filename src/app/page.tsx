@@ -45,54 +45,54 @@ const Page: React.FC = () => {
         <Image
           src="/paper.png"
           alt="Paper Background"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           quality={100}
           priority
         />
         <div className="absolute inset-0 flex flex-col">
           <Navbar />
           <div className="flex-grow flex flex-col items-center justify-center px-4 py-8">
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-800 mb-2 sm:mb-4 text-center max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
-              <TypewriterText text="Welcome to Yaad" onComplete={handleTitleComplete} />
-            </h1>
-            {showGetStarted && (
-              <div className="mt-2 mb-4 text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-blue-600">
-                <TypewriterText text="Get Started" delay={150} />
-              </div>
-            )}
-            <div className="relative transition-transform duration-300 ease-in-out transform hover:scale-105 cursor-pointer mt-4">
-              <SignedIn>
-                <div onClick={() => router.push('/yaad')} className="relative group">
-                  <Image
-                    src="/typewriter.svg"
-                    alt="Typewriter"
-                    width={200}
-                    height={200}
-                    className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64"
-                    priority
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-blue-600 font-semibold text-sm sm:text-base md:text-lg ">Go to Yaad</span>
-                  </div>
-                </div>
-              </SignedIn>
-              <SignedOut>
-                <div onClick={() => router.push('/auth/sign-up')} className="relative group">
-                  <Image
-                    src="/typewriter.svg"
-                    alt="Typewriter"
-                    width={200}
-                    height={200}
-                    className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64"
-                    priority
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-blue-600 font-semibold text-sm sm:text-base md:text-lg">Sign Up</span>
-                  </div>
-                </div>
-              </SignedOut>
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-800 mb-2 sm:mb-4 text-center max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
+          <TypewriterText text="Welcome to Yaad" onComplete={handleTitleComplete} />
+        </h1>
+        {showGetStarted && (
+          <div className="mt-2 mb-4 text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-blue-600">
+            <TypewriterText text="Get Started" delay={150} />
+          </div>
+        )}
+        <div className="relative transition-transform duration-300 ease-in-out transform hover:scale-105 cursor-pointer mt-4">
+          <SignedIn>
+            <div onClick={() => router.push('/yaad')} className="relative group">
+          <Image
+            src="/typewriter.svg"
+            alt="Typewriter"
+            width={200}
+            height={200}
+            className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64"
+            priority
+          />
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span className="text-blue-600 font-semibold text-sm sm:text-base md:text-lg ">Go to Yaad</span>
+          </div>
             </div>
+          </SignedIn>
+          <SignedOut>
+            <div onClick={() => router.push('/auth/sign-up')} className="relative group">
+          <Image
+            src="/typewriter.svg"
+            alt="Typewriter"
+            width={200}
+            height={200}
+            className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64"
+            priority
+          />
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span className="text-blue-600 font-semibold text-sm sm:text-base md:text-lg">Sign Up</span>
+          </div>
+            </div>
+          </SignedOut>
+        </div>
           </div>
         </div>
       </div>

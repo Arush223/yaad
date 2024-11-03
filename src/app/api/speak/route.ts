@@ -1,75 +1,72 @@
-import { createClient, DeepgramClient } from "@deepgram/sdk";
+import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from "@deepgram/sdk";
 import * as fs from "fs";
+import path from 'path';
 
-// STEP 1: Create a Deepgram client with your API key
-const deepgram: DeepgramClient = createClient(process.env.DEEPGRAM_API_KEY as string);
-const text: string = "How are we doing today";
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const text = body.text || "How are we doing today"; // Default text if none provided
 
-const getAudio = async (): Promise<void> => {
-    try {
-        // STEP 2: Make a request and configure the request with options
-        const response = await deepgram.speak.request(
-            { text },
-            {
-                model: "aura-asteria-en",
-                encoding: "linear16",
-                container: "wav",
-            }
-        );
+    const deepgram = createClient(process.env.DEEPGRAM_API_KEY as string);
 
-        // STEP 3: Get the audio stream and headers from the response
-        const stream = await response.getStream();
-        const headers = await response.getHeaders();
+    const response = await deepgram.speak.request(
+      { text },
+      {
+        model: "aura-asteria-en",
+        encoding: "linear16",
+        container: "wav",
+      }
+    );
 
-        if (stream) {
-            // STEP 4: Convert the stream to an audio buffer
-            const buffer = await getAudioBuffer(stream);
-
-            // STEP 5: Write the audio buffer to a file
-            fs.writeFile("output.wav", buffer, (err) => {
-                if (err) {
-                    console.error("Error writing audio to file:", err);
-                } else {
-                    console.log("Audio file written to output.wav");
-                }
-            });
-        } else {
-            console.error("Error generating audio: No stream received");
-        }
-
-        if (headers) {
-            console.log("Headers:", headers);
-        }
-    } catch (error) {
-        console.error("An error occurred:", error);
+    const stream = await response.getStream();
+    if (!stream) {
+      throw new Error("No audio stream received");
     }
-};
 
-// helper function to convert stream to audio buffer
-const getAudioBuffer = async (response: ReadableStream): Promise<Buffer> => {
-    const reader = response.getReader();
+    // Convert stream to buffer
+    const reader = stream.getReader();
     const chunks: Uint8Array[] = [];
-
+    
     while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        chunks.push(value);
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value);
     }
 
-    // Calculate the total length of all chunks
     const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
-
-    // Create a new Uint8Array with the total length
-    const result = new Uint8Array(totalLength);
-
-    // Copy all chunks into the result array
+    const audioBuffer = new Uint8Array(totalLength);
     let position = 0;
+    
     for (const chunk of chunks) {
-        result.set(chunk, position);
-        position += chunk.length;
+      audioBuffer.set(chunk, position);
+      position += chunk.length;
     }
 
-    return Buffer.from(result.buffer);
-};
+    // Save to public directory
+    const fileName = `audio_${Date.now()}.wav`;
+    const publicDir = path.join(process.cwd(), 'public', 'audio');
+    
+    // Ensure directory exists
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true });
+    }
+    
+    const filePath = path.join(publicDir, fileName);
+    fs.writeFileSync(filePath, Buffer.from(audioBuffer));
 
-getAudio();
+    // Return the URL path that can be used by the frontend
+    return NextResponse.json({
+      success: true,
+      audioUrl: `/audio/${fileName}`,
+      text: text // Return the text that was converted
+    });
+    
+  } catch (error) {
+    console.error("Error generating audio:", error);
+    return NextResponse.json(
+      { error: "Failed to generate audio" },
+      { status: 500 }
+    );
+  }
+}
