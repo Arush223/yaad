@@ -24,7 +24,7 @@ At the core of our memory retrieval system is **Pinecone**, a high-performance v
 ### Tailwind CSS for User Interface
 We’ve designed the Living Memory interface with **Tailwind CSS**, a utility-first CSS framework. Tailwind enables rapid, responsive UI development, ensuring that our app is visually appealing, accessible, and easy to navigate for users of all ages and tech familiarity levels.
 
-## Our Team - Trader Joe’s Brand Sparkling Water
+## Team Yaad
 - **Aarush Jagtap** – Full Stack Engineer
 - **Pranav Singh** – Back End Engineer
 - **Siddhant Bhardwaj** – UI/UX Engineer
